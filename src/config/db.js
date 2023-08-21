@@ -1,6 +1,6 @@
 const {connect} = require('mongoose');
 
-const URI = "mongodb+srv://blucanus:4hqx1xuvc3IxxpIb@cluster0.si3pbtb.mongodb.net/?retryWrites=true&w=majority"
+const URI = "mongodb+srv://blucanus:yc68mYeNvnQh7wZ9@mytinerarycluster.clf9gj2.mongodb.net/?retryWrites=true&w=majority"
 
 //forma de conectar db
 /* const connectDB = async () => {
