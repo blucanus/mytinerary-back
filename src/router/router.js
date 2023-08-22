@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 //const {getClients, getClient, addClient, deleteClient} = require('../controllers/clientsControler')
-const {getCities, getCity, addCity, deleteCity} = require('../controllers/citiesControler')
+const {getCities, getCity, addCity, deleteCity, updateCity} = require('../controllers/citiesControler')
 const { /* verifyDataClient */ verifyDataCity } = require('../middlewares/verifications')
 
 
@@ -17,6 +17,7 @@ router.get('/cities', getCities)
 router.get('/cities/:id', getCity)
 router.post('/cities', verifyDataCity, addCity)
 router.delete('/cities', deleteCity)
+router.patch('/cities', updateCity)
 
 
 module.exports = router

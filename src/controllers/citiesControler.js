@@ -56,10 +56,19 @@ const deleteCity = async(req, res) => {
     }
     
 }
-/* const updateCity = async(req, res) => {
-    let{id} = req.query
-    let{update} = req.body
-    await Cities.findByIdAndUpdate(id,update)
-} */
+const updateCity = async(req, res) => {
+    try {
+        let{id} = req.query
+        const citiesNewInfo = req.body
+        const updateNewCity = await Cities.findByIdAndUpdate(id, citiesNewInfo, {new: true})
+        res.status(200).json({
+            message: "The city was updated",
+            updateNewCity
+        })
 
-module.exports = {getCities, getCity, addCity, deleteCity}
+    }catch(err){
+        res.status(500).json({message: "There was an error updating the city"})
+    }
+}
+
+module.exports = {getCities, getCity, addCity, deleteCity, updateCity}
