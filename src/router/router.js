@@ -19,5 +19,5 @@ router.post('/cities', verifyDataCity, addCity)
 router.delete('/cities', deleteCity)
 router.patch('/cities', updateCity)
 
-
+ 
 module.exports = router
