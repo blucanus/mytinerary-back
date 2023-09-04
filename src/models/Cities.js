@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model, Types, mongoose} = require('mongoose');
 
 const schemaCities = new Schema({
     name: {
@@ -13,10 +13,14 @@ const schemaCities = new Schema({
         type: String,
         required: true
     },
-    interestPoint: {
-        type: String,
-        required: false
-    }
+    interestPoint: [{
+         type: mongoose.Types.ObjectId, ref: 'InterestPoint'
+    }],
+    itinerary : [{
+        type: mongoose.Types.ObjectId, ref: 'Itinerary'
+    }]
+
+
 })
 const Cities = model("Cities", schemaCities)
 module.exports = Cities

@@ -1,4 +1,6 @@
 const Cities = require("../models/Cities");
+const InterestPoint = require("../models/InterestPoint");
+
 
 
 const getCities = async(req, res) => {
@@ -29,14 +31,24 @@ const getCity = async(req, res) => {
 
 const addCity = async(req, res) => {
     try{
-        let payload = req.body
+        const newCity = { ... req.body }
+        
+        const {interestPoint: interestPointName } = req.body
+       
+        const intPoint = await InterestPoint.findOne({name: interestPointName})
 
-        let addedCity = await Cities.create(payload)
-
+        if(intPoint) {
+            newCity.interestPoint = intPoint._id
+        }else {
+            const newInterestPoint = await InterestPoint.create({ name: req.body.interestPoint})
+            newCity.interestPoint = newInterestPoint._id
+        }
+        const addedCity = await Cities.create(newCity)
+        await InterestPoint.findOneAndUpdate( {_id: newCity.interestPoint}, { $push: {city: addedCity._id}})
         res.status(201).json({
-                "message": "The city has been added",
-                "client": addedCity
-            })
+            "message": "The city has been added",
+            "client": addedCity
+        })
     }catch(err){
         res.status(500).json({message: err})
     }
