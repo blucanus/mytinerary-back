@@ -11,7 +11,7 @@ const schemaItinerary = new Schema({
         required: true
     },
     city: {
-        type: mongoose.Types.ObjectId, ref: 'city'
+        type: mongoose.Types.ObjectId, ref: 'City'
     },
     duration: {
         type: Number,

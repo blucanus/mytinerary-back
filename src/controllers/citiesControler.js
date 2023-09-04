@@ -1,5 +1,6 @@
 const Cities = require("../models/Cities");
 const InterestPoint = require("../models/InterestPoint");
+const Itinerary = require("../models/Itinerary");
 
 
 
@@ -20,8 +21,8 @@ const getCity = async(req, res) => {
     try{
         let {id} = req.params
  
-        let cityFounded = await Cities.findById(id)
-
+        let cityFounded = await Cities.findById(id).populate("itinerary")
+        
         res.status(200).json(cityFounded)
 
     }catch(err){

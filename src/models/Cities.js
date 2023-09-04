@@ -22,5 +22,5 @@ const schemaCities = new Schema({
 
 
 })
-const Cities = model("Cities", schemaCities)
+const Cities = model("City", schemaCities)
 module.exports = Cities
