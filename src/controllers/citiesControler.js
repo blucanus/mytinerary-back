@@ -6,8 +6,14 @@ const Itinerary = require("../models/Itinerary");
 
 const getCities = async(req, res) => {
 
+    const queryParams = {}
+
+    if(req.query.name) {
+        queryParams.name = {$regex: req.query.name, $options: 'i'}
+    }
+
     try{
-        let cities = await Cities.find()
+        let cities = await Cities.find(queryParams)
         res.json(
             cities
         )
