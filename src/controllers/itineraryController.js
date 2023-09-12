@@ -34,9 +34,6 @@ const addItinerary = async(req, res) => {
         const newIt = await Itinerary.create(newItinerary)
 
         await Cities.findOneAndUpdate( {_id: newItinerary.city}, { $push: {itinerary: newIt._id}})
-
-
-
         res.status(201).json({newItinerary: newItinerary})
 
     }catch(err) {
@@ -44,4 +41,35 @@ const addItinerary = async(req, res) => {
     }
 }
 
-module.exports = {getIntineraries, addItinerary, getIntineraryForCity}
+const deleteItinerary = async(req, res) => {
+    try{
+        let {id} = req.query
+ 
+        await Itinerary.deleteOne({_id: id})
+
+        res.status(201).json({
+                "message": "The Itinerary has been deleted",
+            })
+    }catch(err){
+        res.status(500).json({message: err})
+    }
+    
+}
+const updateItinerary = async(req, res) => {
+    try {
+        let{id} = req.query
+        console.log(id);
+        const itinerariesNewInfo = req.body
+        const updateNewItinerary = await Itinerary.findByIdAndUpdate(id, itinerariesNewInfo, {new: true})
+        
+        res.status(200).json({
+            message: "The Itinerary was updated",
+            updateNewItinerary
+        })
+
+    }catch(err){
+        res.status(500).json({message: "There was an error updating the Itinerary"})
+    }
+}
+
+module.exports = {getIntineraries, addItinerary, getIntineraryForCity, deleteItinerary, updateItinerary}
