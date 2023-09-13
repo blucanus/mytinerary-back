@@ -4,6 +4,10 @@ const {getCities, getCity, addCity, deleteCity, updateCity} = require('../contro
 /* const { verifyDataClient, verifyDataCity } = require('../middlewares/verifications') */
 const { addIntPoint, getInterestPoint } = require('../controllers/interestPointController')
 const { addItinerary, getIntineraries, getIntineraryForCity, deleteItinerary, updateItinerary } = require('../controllers/itineraryController')
+const { signIn, signUp } = require('../controllers/authController')
+const { passport } = require('../middlewares/passport')
+
+
 
 //endpoints cities routes
 router.get('/cities', getCities)
@@ -20,6 +24,12 @@ router.get('/itinerary', getIntineraries)
 router.get('/itinerary/:city_id', getIntineraryForCity)
 router.delete('/itinerary', deleteItinerary)
 router.patch('/itinerary', updateItinerary)
+
+
+router.post('/auth/signin', signIn)
+router.post('/auth/signin/token', passport.authenticate('jwt', {session: false}), signInToken)
+router.post('/auth/signup', signUp)
+
  
  
 module.exports = router
