@@ -6,7 +6,7 @@ const { addIntPoint, getInterestPoint } = require('../controllers/interestPointC
 const { addItinerary, getIntineraries, getIntineraryForCity, deleteItinerary, updateItinerary } = require('../controllers/itineraryController')
 const {signInToken, signIn, signUp} = require('../controllers/authController')
 const {passport} = require('../middlewares/passport')
-
+const signUpValidator = require('../middlewares/validator')
 
 
 //endpoints cities routes
@@ -28,7 +28,7 @@ router.patch('/itinerary', updateItinerary)
 
 router.post('/auth/signin', signIn)
 router.post('/auth/signin/token', passport.authenticate('jwt', {session: false}), signInToken)
-router.post('/auth/signup', signUp)
+router.post('/auth/signup', signUpValidator, signUp)
 
  
  
