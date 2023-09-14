@@ -54,8 +54,9 @@ const signIn = async(req, res) => {
         res.json({success: false, error: error})
     }
 }
-module.exports = {signIn, signUp}
-module.exports = signInToken = (req, res) => {
-    console.log(req);
-    res.json(req)
+const signInToken = (req, res) => {
+    const userResponse = {email: req.user.email, image: req.user.image, name: req.user.name, id: req.user._id}
+
+    res.status(200).json({success: true, user: userResponse})
 }
+module.exports = {signIn, signUp, signInToken}

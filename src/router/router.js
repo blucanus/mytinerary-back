@@ -4,8 +4,8 @@ const {getCities, getCity, addCity, deleteCity, updateCity} = require('../contro
 /* const { verifyDataClient, verifyDataCity } = require('../middlewares/verifications') */
 const { addIntPoint, getInterestPoint } = require('../controllers/interestPointController')
 const { addItinerary, getIntineraries, getIntineraryForCity, deleteItinerary, updateItinerary } = require('../controllers/itineraryController')
-const { signIn, signUp } = require('../controllers/authController')
-const { passport } = require('../middlewares/passport')
+const {signInToken, signIn, signUp} = require('../controllers/authController')
+const {passport} = require('../middlewares/passport')
 
 
 
